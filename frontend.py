@@ -43,7 +43,16 @@ list1.configure(yscrollcommand=sb1.set)
 sb1.configure(command=list1.yview)
 
 # ============btn===============
-b1 = Button(window, text="View All", width=12)
+
+
+def view_command():
+    list1.delete(0, END)
+    books = backend.view()
+    for book in books:
+        list1.insert(END, book)
+
+
+b1 = Button(window, text="View All", width=12, command=lambda : view_command())
 b1.grid(row=2, column=3)
 
 b2 = Button(window, text="Search Entry", width=12)
