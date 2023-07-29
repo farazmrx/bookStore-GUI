@@ -52,6 +52,15 @@ sb1.grid(row=2, column=2, rowspan=6)
 list1.configure(yscrollcommand=sb1.set)
 sb1.configure(command=list1.yview)
 
+
+def get_selected_row(event):
+    global selected_book
+    index = list1.curselection()[0]
+    selected_book = list1.get(index)
+
+
+list1.bind("<<ListboxSelect>>", get_selected_row)
+
 # ============btn===============
 
 
@@ -86,7 +95,13 @@ b3.grid(row=4, column=3)
 b4 = Button(window, text="Update Selected", width=12)
 b4.grid(row=5, column=3)
 
-b5 = Button(window, text="Delete Selected", width=12)
+
+def delete_command():
+    backend.delete(selected_book[0])
+    view_command()
+
+
+b5 = Button(window, text="Delete Selected", width=12, command=lambda : delete_command())
 b5.grid(row=6, column=3)
 
 b6 = Button(window, text="Close", width=12)
