@@ -56,22 +56,22 @@ sb1.configure(command=list1.yview)
 def get_selected_row(event):
     global selected_book
 
-    # if len(list1.curselection()) > 0:
-    #     pass
+    if len(list1.curselection()) > 0:
+        index = list1.curselection()[0]
+        selected_book = list1.get(index)
+        e1.delete(0, END)
+        e1.insert(END, selected_book[1])
 
-    index = list1.curselection()[0]
-    selected_book = list1.get(index)
-    e1.delete(0, END)
-    e1.insert(END, selected_book[1])
+        e2.delete(0, END)
+        e2.insert(END, selected_book[2])
 
-    e2.delete(0, END)
-    e2.insert(END, selected_book[2])
+        e3.delete(0, END)
+        e3.insert(END, selected_book[3])
 
-    e3.delete(0, END)
-    e3.insert(END, selected_book[3])
+        e4.delete(0, END)
+        e4.insert(END, selected_book[4])
 
-    e4.delete(0, END)
-    e4.insert(END, selected_book[4])
+
 
 
 list1.bind("<<ListboxSelect>>", get_selected_row)
@@ -125,7 +125,7 @@ def delete_command():
 b5 = Button(window, text="Delete Selected", width=12, command=lambda : delete_command())
 b5.grid(row=6, column=3)
 
-b6 = Button(window, text="Close", width=12)
+b6 = Button(window, text="Close", width=12, command=window.destroy)
 b6.grid(row=7, column=3)
 
 view_command()
